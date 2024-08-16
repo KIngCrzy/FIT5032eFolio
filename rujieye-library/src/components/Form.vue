@@ -19,13 +19,23 @@
             </div>
           </div>
           <div class="row mb-3">
-            <div class="col-md-6 col-sm-6">
-              <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="isAustralian" v-model="formData.isAustralian" />
-                <label class="form-check-label" for="isAustralian">Australian Resident?</label>
+            <div class="col-md-6">
+              <label class="form-label">Australian Resident?</label>
+              <div>
+                <div class="form-check form-check-inline">
+                  <input type="radio" class="form-check-input" id="isAustralianYes" value="yes"
+                    v-model="formData.isAustralian" />
+                  <label class="form-check-label" for="isAustralianYes">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input type="radio" class="form-check-input" id="isAustralianNo" value="no"
+                    v-model="formData.isAustralian" />
+                  <label class="form-check-label" for="isAustralianNo">No</label>
+                </div>
+                <div v-if="errors.resident" class="text-danger">{{ errors.resident }}</div>
               </div>
             </div>
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-6">
               <label for="gender" class="form-label">Gender</label>
               <select class="form-select" id="gender" v-model="formData.gender" @change="validateGender">
                 <option disabled value="">Please select one</option>
@@ -49,7 +59,7 @@
         </form>
       </div>
     </div>
-    <div class="row mt-5"  v-if="submittedCards.length > 0">
+    <div class="row mt-5" v-if="submittedCards.length > 0">
       <DataTable :value="submittedCards" style="width: 100%">
         <Column field="username" header="Username"></Column>
         <Column field="password" header="Password"></Column>
@@ -73,7 +83,7 @@ const booleanTemplate = (rowData) => {
 const formData = ref({
   username: '',
   password: '',
-  isAustralian: false,
+  isAustralian: '',
   reason: '',
   gender: ''
 });
@@ -118,6 +128,14 @@ const validatePassword = (blur) => {
   }
 };
 
+const validateAustralianResident = () => {
+  if (!formData.value.isAustralian) {
+    errors.value.resident = "Please select if you are an Australian resident.";
+  } else {
+    errors.value.resident = null;
+  }
+};
+
 const validateGender = () => {
   if (!formData.value.gender) {
     errors.value.gender = "You must select a gender";
@@ -139,6 +157,7 @@ const validateReason = () => {
 const submitForm = () => {
   validateName(true);
   validatePassword(true);
+  validateAustralianResident();
   validateGender();
   validateReason();
 
