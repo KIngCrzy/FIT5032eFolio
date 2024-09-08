@@ -12,6 +12,12 @@
           <router-link v-if="isAuthenticated" to="/about" class="nav-link" active-class="active">About</router-link>
         </li>
         <li class="nav-item">
+          <router-link v-if="isAuthenticated" to="/FireLogin" class="nav-link" active-class="active">Firebase Login</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link v-if="isAuthenticated" to="/FireRegister" class="nav-link" active-class="active">Firebase Register</router-link>
+        </li>
+        <li class="nav-item">
           <button v-if="isAuthenticated" @click="logout" class="btn btn-link nav-link">Logout</button>
         </li>
       </ul>
@@ -22,11 +28,10 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
-import { useRouter, useRoute } from 'vue-router';
+import { useRouter } from 'vue-router';
 
 const isAuthenticated = ref(localStorage.getItem('isAuthenticated'));
 const router = useRouter();
-const route = useRoute();
 const updateAuthStatus = () => {
   isAuthenticated.value = localStorage.getItem('isAuthenticated');
 };
