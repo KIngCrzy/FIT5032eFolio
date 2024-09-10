@@ -18,6 +18,9 @@
           <router-link v-if="isAuthenticated" to="/FireRegister" class="nav-link" active-class="active">Firebase Register</router-link>
         </li>
         <li class="nav-item">
+          <router-link v-if="isAuthenticated" to="/AddBook" class="nav-link" active-class="active">Add Book</router-link>
+        </li>
+        <li class="nav-item">
           <button v-if="isAuthenticated" @click="logout" class="btn btn-link nav-link">Logout</button>
         </li>
       </ul>
@@ -29,18 +32,28 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { getAuth, signOut } from 'firebase/auth';
 
 const isAuthenticated = ref(localStorage.getItem('isAuthenticated'));
 const router = useRouter();
+const auth = getAuth();
+
 const updateAuthStatus = () => {
   isAuthenticated.value = localStorage.getItem('isAuthenticated');
 };
 
-const logout = () => {
-  localStorage.removeItem('isAuthenticated');
-  isAuthenticated.value = null;
-  window.dispatchEvent(new CustomEvent('auth-change'));
-  router.push('/login'); 
+const logout = async () => {
+  console.log("Current User before logout:", auth.currentUser);  // Log current user before logout
+  try {
+    await signOut(auth);
+    console.log("User logged out. Current User:", auth.currentUser);  // Log after Firebase sign-out
+    localStorage.removeItem('isAuthenticated');
+    isAuthenticated.value = null;
+    window.dispatchEvent(new CustomEvent('auth-change'));
+    router.push('/FireLogin');
+  } catch (error) {
+    console.error("Logout failed:", error);
+  }
 };
 
 onMounted(() => {
@@ -51,7 +64,6 @@ onUnmounted(() => {
   window.removeEventListener('auth-change', updateAuthStatus);
 });
 </script>
-
 
 <style scoped>
 .b-example-divider {
