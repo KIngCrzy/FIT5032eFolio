@@ -3,25 +3,40 @@
     <header class="d-flex justify-content-center py-3">
       <ul class="nav nav-pills">
         <li class="nav-item">
-          <router-link v-if="!isAuthenticated && $route.path !== '/login'" to="/login" class="nav-link" active-class="active">Go to login</router-link>
+          <router-link v-if="!isAuthenticated && $route.path !== '/login'" to="/login" class="nav-link"
+            active-class="active">Go to login</router-link>
         </li>
         <li class="nav-item">
-          <router-link v-if="isAuthenticated" to="/home" class="nav-link" active-class="active">Home (Week 5)</router-link>
+          <router-link v-if="isAuthenticated" to="/home" class="nav-link" active-class="active">Home (Week
+            5)</router-link>
         </li>
         <li class="nav-item">
           <router-link v-if="isAuthenticated" to="/about" class="nav-link" active-class="active">About</router-link>
         </li>
         <li class="nav-item">
-          <router-link v-if="isAuthenticated" to="/FireLogin" class="nav-link" active-class="active">Firebase Login</router-link>
+          <router-link v-if="isAuthenticated" to="/FireLogin" class="nav-link" active-class="active">Firebase
+            Login</router-link>
         </li>
         <li class="nav-item">
-          <router-link v-if="isAuthenticated" to="/FireRegister" class="nav-link" active-class="active">Firebase Register</router-link>
+          <router-link v-if="isAuthenticated" to="/FireRegister" class="nav-link" active-class="active">Firebase
+            Register</router-link>
         </li>
         <li class="nav-item">
-          <router-link v-if="isAuthenticated" to="/AddBook" class="nav-link" active-class="active">Add Book</router-link>
+          <router-link v-if="isAuthenticated" to="/AddBook" class="nav-link" active-class="active">Add
+            Book</router-link>
         </li>
         <li class="nav-item">
-          <router-link v-if="isAuthenticated" to="/GetBookCount" class="nav-link" active-class="active">Get Book Count</router-link>
+          <router-link v-if="isAuthenticated" to="/GetBookCount" class="nav-link" active-class="active">Get Book
+            Count</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link v-if="isAuthenticated" to="/WeatherCheck" class="nav-link" active-class="active">Get Weather</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link v-if="isAuthenticated" to="/CountBookAPI" class="nav-link" active-class="active">Count Book API</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link v-if="isAuthenticated" to="/GetAllBookAPI" class="nav-link" active-class="active">Get All Book API</router-link>
         </li>
         <li class="nav-item">
           <button v-if="isAuthenticated" @click="logout" class="btn btn-link nav-link">Logout</button>
