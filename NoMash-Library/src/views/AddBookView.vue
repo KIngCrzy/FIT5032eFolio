@@ -15,7 +15,6 @@
                     <button type="submit">Add Book</button>
                 </form>
 
-                <!-- Render BookList component here -->
                 <h2 class="mt-5">Book List</h2>
                 <BookList />
             </div>
