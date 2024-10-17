@@ -7,6 +7,7 @@ app.get('/', (req, res) => {
     res.send('Hello from Node.js!');
 });
 
+// test
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
