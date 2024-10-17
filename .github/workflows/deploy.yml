@@ -13,6 +13,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
+    - name: Change Directory to Project Folder
+      working-directory: ./NoMash-Library
+
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
